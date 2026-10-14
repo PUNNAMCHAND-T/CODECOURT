@@ -264,13 +264,22 @@ async def test_trigger_pr_review_service(test_session: AsyncSession) -> None:
 
 
 @pytest.mark.asyncio
-async def test_post_trigger_success(client: AsyncClient) -> None:
+async def test_post_trigger_success(
+    client: AsyncClient,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     """Verify POST /api/reviews/trigger enqueues review and returns 201 Created."""
+    from unittest.mock import AsyncMock
+
+    mock_execute = AsyncMock()
+    monkeypatch.setattr("backend.app.api.reviews.execute_review", mock_execute)
+
     response = await client.post(
         "/api/reviews/trigger",
         json={"pr_url": "https://github.com/octocat/Hello-World/pull/101"},
     )
     assert response.status_code == 201
+    mock_execute.assert_called_once()
     data = response.json()
     assert data["status"] == "queued"
     assert data["pr_number"] == 101

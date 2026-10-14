@@ -36,6 +36,8 @@ jobs:
         run: pip-audit -r backend/requirements.txt --no-deps --disable-pip -s osv
 
       - name: Run tests with coverage
+        env:
+          DATABASE_URL: sqlite+aiosqlite:///ci_test.db
         run: pytest --cov=backend/app --cov-report=term backend/tests/ -v
 
   frontend-audit-build:

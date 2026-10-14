@@ -17,8 +17,8 @@ class Settings(BaseSettings):
     app_env: str = "development"
     log_level: str = "info"
 
-    # Database (used from T0.3 onward)
-    database_url: str = "postgresql+asyncpg://codecourt:codecourt@localhost:5432/codecourt"
+    # Database (used from T0.3 onward; PostgreSQL in docker-compose/prod, SQLite default)
+    database_url: str = "sqlite+aiosqlite:///codecourt.db"
 
     # GitHub (used from T1.1 onward)
     github_webhook_secret: str = ""
