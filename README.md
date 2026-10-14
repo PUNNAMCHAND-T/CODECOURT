@@ -5,7 +5,6 @@
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688?logo=fastapi&logoColor=white)
 ![LangGraph](https://img.shields.io/badge/Orchestration-LangGraph-FF4B4B)
 ![React](https://img.shields.io/badge/Frontend-React%2019%20+%20TypeScript-61DAFB?logo=react&logoColor=black)
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
 
 **CodeCourt** is an asynchronous, multi-agent code review platform that automates GitHub Pull Request analysis. Rather than relying on monolithic single-prompt LLM reviews—which frequently generate vague commentary, duplicate findings, and hallucinated line numbers—CodeCourt decomposes code review into specialized domain agents coordinated through a stateful directed graph, backed by deterministic coordinate validation and an adversarial judge synthesis layer.
 
@@ -211,9 +210,3 @@ npm --prefix frontend run build
 1. **Zero External SDK Lock-in:** LLM communication is implemented via direct HTTP transport (`httpx`) adhering to an abstract `LLMClient` protocol, making it straightforward to swap or add providers (e.g. Anthropic, OpenAI, local Ollama).
 2. **Defensive Line Grounding:** Hallucinated line references are one of the most frustrating aspects of automated review tools. CodeCourt extracts the modified coordinate spans from the raw unified diff and cross-checks every finding before accepting it into state.
 3. **Financial Safety & Cost Controls:** Real-time token and USD cost calculation prevents accidental billing spikes. A circuit breaker automatically terminates evaluation chains that exceed configured token bounds.
-
----
-
-## License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
