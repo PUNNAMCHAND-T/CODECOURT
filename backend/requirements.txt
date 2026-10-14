@@ -1,0 +1,37 @@
+# Web framework
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+
+# Settings and validation
+pydantic==2.10.5
+pydantic-settings==2.7.1
+
+# Authentication (PROJECT.md §7 Phase 6)
+pyjwt==2.15.1
+
+# Database
+sqlalchemy[asyncio]==2.0.36
+asyncpg==0.30.0
+psycopg2-binary==2.9.10
+alembic==1.14.1
+
+# Multi-agent orchestration (PROJECT.md §3)
+langgraph==1.2.14
+
+# Observability (PROJECT.md §7 Phase 6: optional Langfuse tracing)
+langfuse==4.17.0
+
+# Testing
+pytest==9.0.3
+httpx==0.28.1
+pytest-asyncio==1.4.0
+aiosqlite==0.22.1
+# Test coverage reporting (PROJECT.md §7 Phase 6: coverage measurement)
+pytest-cov==6.0.0
+
+# Dev tools
+ruff==0.16.10
+mypy==2.4.0
+pre-commit==4.6.2
+# Dependency security scanning (PROJECT.md §7 Phase 6: vulnerability scanning)
+pip-audit==2.10.1

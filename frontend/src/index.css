@@ -1,0 +1,446 @@
+@import "tailwindcss";
+
+/* ============================================
+   GitHub-Inspired Design System for CodeCourt
+   Dark + Light themes with Glassmorphism
+   ============================================ */
+
+/* ---------- CSS Custom Properties ---------- */
+:root {
+  /* Light theme (GitHub light) */
+  --cc-bg-canvas: #ffffff;
+  --cc-bg-default: #f6f8fa;
+  --cc-bg-subtle: #f0f3f6;
+  --cc-bg-inset: #e8ebef;
+  --cc-bg-emphasis: #24292f;
+  --cc-border-default: #d0d7de;
+  --cc-border-muted: #d8dee4;
+  --cc-border-subtle: #e8ebef;
+  --cc-fg-default: #1f2328;
+  --cc-fg-muted: #656d76;
+  --cc-fg-subtle: #6e7781;
+  --cc-fg-onEmphasis: #ffffff;
+  --cc-accent-fg: #0969da;
+  --cc-accent-emphasis: #0969da;
+  --cc-accent-subtle: #ddf4ff;
+  --cc-accent-muted: rgba(84, 174, 255, 0.4);
+  --cc-success-fg: #1a7f37;
+  --cc-success-emphasis: #1f883d;
+  --cc-success-subtle: #dafbe1;
+  --cc-danger-fg: #d1242f;
+  --cc-danger-emphasis: #cf222e;
+  --cc-danger-subtle: #ffebe9;
+  --cc-warning-fg: #9a6700;
+  --cc-warning-emphasis: #bf8700;
+  --cc-warning-subtle: #fff8c5;
+  --cc-done-fg: #8250df;
+  --cc-done-emphasis: #8250df;
+  --cc-done-subtle: #fbefff;
+  --cc-header-bg: #f6f8fa;
+  --cc-header-border: #d0d7de;
+  --cc-sidebar-bg: #f6f8fa;
+
+  /* Glassmorphism tokens */
+  --cc-glass-bg: rgba(255, 255, 255, 0.65);
+  --cc-glass-border: rgba(255, 255, 255, 0.3);
+  --cc-glass-blur: 16px;
+  --cc-glass-shadow: 0 8px 32px rgba(31, 35, 40, 0.12);
+  --cc-glass-highlight: rgba(255, 255, 255, 0.8);
+
+  /* Gradient accents */
+  --cc-gradient-primary: linear-gradient(135deg, #0969da 0%, #8250df 100%);
+  --cc-gradient-success: linear-gradient(135deg, #1a7f37 0%, #2ea043 100%);
+  --cc-gradient-danger: linear-gradient(135deg, #cf222e 0%, #fa4549 100%);
+
+  /* Animation durations */
+  --cc-anim-fast: 150ms;
+  --cc-anim-normal: 250ms;
+  --cc-anim-slow: 400ms;
+}
+
+[data-theme="dark"] {
+  --cc-bg-canvas: #0d1117;
+  --cc-bg-default: #161b22;
+  --cc-bg-subtle: #1c2128;
+  --cc-bg-inset: #010409;
+  --cc-bg-emphasis: #6e7681;
+  --cc-border-default: #30363d;
+  --cc-border-muted: #21262d;
+  --cc-border-subtle: #161b22;
+  --cc-fg-default: #e6edf3;
+  --cc-fg-muted: #8b949e;
+  --cc-fg-subtle: #6e7681;
+  --cc-fg-onEmphasis: #ffffff;
+  --cc-accent-fg: #58a6ff;
+  --cc-accent-emphasis: #1f6feb;
+  --cc-accent-subtle: rgba(56, 139, 253, 0.15);
+  --cc-accent-muted: rgba(56, 139, 253, 0.4);
+  --cc-success-fg: #3fb950;
+  --cc-success-emphasis: #238636;
+  --cc-success-subtle: rgba(46, 160, 67, 0.15);
+  --cc-danger-fg: #f85149;
+  --cc-danger-emphasis: #da3633;
+  --cc-danger-subtle: rgba(248, 81, 73, 0.15);
+  --cc-warning-fg: #d29922;
+  --cc-warning-emphasis: #9e6a03;
+  --cc-warning-subtle: rgba(187, 128, 9, 0.15);
+  --cc-done-fg: #a371f7;
+  --cc-done-emphasis: #8957e5;
+  --cc-done-subtle: rgba(163, 113, 247, 0.15);
+  --cc-header-bg: #161b22;
+  --cc-header-border: #30363d;
+  --cc-sidebar-bg: #161b22;
+
+  /* Glassmorphism tokens (dark) */
+  --cc-glass-bg: rgba(22, 27, 34, 0.7);
+  --cc-glass-border: rgba(48, 54, 61, 0.6);
+  --cc-glass-blur: 20px;
+  --cc-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --cc-glass-highlight: rgba(88, 166, 255, 0.08);
+
+  /* Gradient accents */
+  --cc-gradient-primary: linear-gradient(135deg, #1f6feb 0%, #8957e5 100%);
+  --cc-gradient-success: linear-gradient(135deg, #238636 0%, #3fb950 100%);
+  --cc-gradient-danger: linear-gradient(135deg, #da3633 0%, #f85149 100%);
+}
+
+/* ---------- Base Styles ---------- */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
+    background-color: var(--cc-bg-canvas);
+    color: var(--cc-fg-default);
+    transition: background-color var(--cc-anim-normal) ease, color var(--cc-anim-normal) ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code, pre, .font-mono {
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+  }
+
+  ::selection {
+    background: var(--cc-accent-muted);
+    color: var(--cc-fg-default);
+  }
+}
+
+/* ---------- Glassmorphism Utilities ---------- */
+@layer components {
+  .glass {
+    background: var(--cc-glass-bg);
+    backdrop-filter: blur(var(--cc-glass-blur));
+    -webkit-backdrop-filter: blur(var(--cc-glass-blur));
+    border: 1px solid var(--cc-glass-border);
+    box-shadow: var(--cc-glass-shadow);
+  }
+
+  .glass-card {
+    background: var(--cc-glass-bg);
+    backdrop-filter: blur(var(--cc-glass-blur));
+    -webkit-backdrop-filter: blur(var(--cc-glass-blur));
+    border: 1px solid var(--cc-glass-border);
+    box-shadow: var(--cc-glass-shadow);
+    border-radius: 12px;
+    transition: all var(--cc-anim-normal) cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cc-glass-highlight), transparent);
+    opacity: 0;
+    transition: opacity var(--cc-anim-normal) ease;
+  }
+
+  .glass-card:hover::before {
+    opacity: 1;
+  }
+
+  .glass-card:hover {
+    box-shadow: var(--cc-glass-shadow), 0 0 0 1px var(--cc-accent-muted);
+    transform: translateY(-2px);
+  }
+
+  /* Glass button */
+  .glass-btn {
+    background: var(--cc-glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--cc-glass-border);
+    border-radius: 8px;
+    padding: 6px 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--cc-fg-default);
+    cursor: pointer;
+    transition: all var(--cc-anim-fast) ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .glass-btn:hover {
+    background: var(--cc-glass-highlight);
+    border-color: var(--cc-accent-muted);
+    box-shadow: 0 2px 12px var(--cc-accent-muted);
+  }
+
+  .glass-btn:active {
+    transform: scale(0.97);
+  }
+
+  /* Glass input */
+  .glass-input {
+    background: var(--cc-glass-bg);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border: 1px solid var(--cc-border-default);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 13px;
+    color: var(--cc-fg-default);
+    transition: all var(--cc-anim-fast) ease;
+    outline: none;
+  }
+
+  .glass-input:focus {
+    border-color: var(--cc-accent-fg);
+    box-shadow: 0 0 0 3px var(--cc-accent-subtle);
+  }
+
+  .glass-input::placeholder {
+    color: var(--cc-fg-subtle);
+  }
+}
+
+/* ---------- GitHub-Style Header ---------- */
+@layer components {
+  .gh-header {
+    background: var(--cc-header-bg);
+    border-bottom: 1px solid var(--cc-header-border);
+    backdrop-filter: blur(var(--cc-glass-blur));
+    -webkit-backdrop-filter: blur(var(--cc-glass-blur));
+    transition: background-color var(--cc-anim-normal) ease, border-color var(--cc-anim-normal) ease;
+  }
+
+  .gh-nav-tab {
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--cc-fg-muted);
+    border-radius: 6px;
+    transition: all var(--cc-anim-fast) ease;
+    cursor: pointer;
+    position: relative;
+    border: none;
+    background: transparent;
+  }
+
+  .gh-nav-tab:hover {
+    color: var(--cc-fg-default);
+    background: var(--cc-bg-subtle);
+  }
+
+  .gh-nav-tab.active {
+    color: var(--cc-fg-default);
+    font-weight: 600;
+  }
+
+  .gh-nav-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 2px;
+    background: var(--cc-accent-emphasis);
+    border-radius: 2px;
+    animation: tabSlideIn var(--cc-anim-normal) cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* ---------- GitHub-Style Status Labels ---------- */
+@layer components {
+  .gh-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 9999px;
+    line-height: 20px;
+    white-space: nowrap;
+  }
+
+  .gh-label-success {
+    background: var(--cc-success-subtle);
+    color: var(--cc-success-fg);
+  }
+
+  .gh-label-danger {
+    background: var(--cc-danger-subtle);
+    color: var(--cc-danger-fg);
+  }
+
+  .gh-label-warning {
+    background: var(--cc-warning-subtle);
+    color: var(--cc-warning-fg);
+  }
+
+  .gh-label-accent {
+    background: var(--cc-accent-subtle);
+    color: var(--cc-accent-fg);
+  }
+
+  .gh-label-muted {
+    background: var(--cc-bg-subtle);
+    color: var(--cc-fg-muted);
+    border: 1px solid var(--cc-border-default);
+  }
+
+  .gh-label-done {
+    background: var(--cc-done-subtle);
+    color: var(--cc-done-fg);
+  }
+}
+
+/* ---------- Animations ---------- */
+@keyframes tabSlideIn {
+  from { width: 0%; opacity: 0; }
+  to { width: 80%; opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes glassShine {
+  0% { left: -100%; }
+  50% { left: 100%; }
+  100% { left: 100%; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--cc-accent-muted); }
+  50% { box-shadow: 0 0 20px 4px var(--cc-accent-muted); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: var(--cc-border-default); }
+  50% { border-color: var(--cc-accent-fg); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ---------- Animation Utility Classes ---------- */
+@layer utilities {
+  .animate-fadeInUp {
+    animation: fadeInUp 0.4s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease both;
+  }
+
+  .animate-scaleIn {
+    animation: scaleIn 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  .animate-shimmer {
+    background: linear-gradient(90deg, transparent 25%, var(--cc-glass-highlight) 50%, transparent 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-pulseGlow {
+    animation: pulseGlow 2s ease-in-out infinite;
+  }
+
+  .animate-borderGlow {
+    animation: borderGlow 2s ease-in-out infinite;
+  }
+
+  .animate-gradientShift {
+    background-size: 200% 200%;
+    animation: gradientShift 4s ease infinite;
+  }
+
+  /* Staggered animation delays */
+  .anim-delay-1 { animation-delay: 0.05s; }
+  .anim-delay-2 { animation-delay: 0.1s; }
+  .anim-delay-3 { animation-delay: 0.15s; }
+  .anim-delay-4 { animation-delay: 0.2s; }
+  .anim-delay-5 { animation-delay: 0.25s; }
+  .anim-delay-6 { animation-delay: 0.3s; }
+}
+
+/* ---------- Scrollbar Styling ---------- */
+@layer base {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--cc-border-default);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--cc-fg-subtle);
+  }
+}
+
+/* ---------- Responsive Helpers ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

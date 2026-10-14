@@ -1,0 +1,125 @@
+# ==============================================================================
+# Credentials and Secrets (NEVER COMMIT)
+# ==============================================================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+serviceAccount*.json
+firebase-adminsdk*.json
+credentials.json
+secrets.*
+
+# ==============================================================================
+# Dependencies and Build Output
+# ==============================================================================
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+*.whl
+.venv/
+venv/
+ENV/
+env/
+
+# Node / Frontend / Next.js
+node_modules/
+frontend/dist/
+dist-ssr/
+.next/
+*.local
+
+# Testing, Linting & Coverage
+.coverage
+.coverage.*
+coverage/
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# ==============================================================================
+# OS and Editor Files
+# ==============================================================================
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editors & IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Docker override
+docker-compose.override.yml
+
+# ==============================================================================
+# Large or Generated Files
+# ==============================================================================
+datasets/
+model_weights/
+weights/
+uploads/
+*.zip
+*.tar
+*.tar.gz
+*.7z
+*.rar
+*.sqlite
+*.sqlite3
+*.db
+temp/
+tmp/
+
+# ==============================================================================
+# ALL AI-Agent Files, Instructions, Memory & Progress Trackers
+# ==============================================================================
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+.claude/
+.cursor/
+.cursorrules
+.windsurf*
+.github/copilot-instructions.md
+.aider*
+.cline*
+memory-bank/
+agent-context/
+progress.md
+PROGRESS.md
+TODO.md
+PLAN.md
+NOTES.md
+session-logs/
+session_logs/
+*.prompt
+*.prompt.md
